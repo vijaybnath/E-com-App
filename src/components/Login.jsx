@@ -1,13 +1,28 @@
 import { Box, Button, TextField, Typography } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from './Navbar'
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import image from "../Images/avatar.png"
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from './firebase';
+import { useNavigate } from 'react-router-dom';
 
 
 const Login = () => {
-    const text = 'Sign up';
+  const text = 'Sign up';
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const signIn = async () => {
+    try {
+      signInWithEmailAndPassword(auth, email, password);
+    } catch (e) {
+      alert(e.message);
+    }
+    navigate("/")
+  }
+
   return (
     <div>
         <Navbar text={text} buttonText="Home" path="/" path_second="/signUp"/>
@@ -19,9 +34,9 @@ const Login = () => {
           <Typography  variant='h3' style={{ fontWeight: '600', fontSize: '35px' }}>Login </Typography>
           <img src={image} alt="donut" style={{ width: '240px' }} /> <br />
 
-        <TextField sx={{}} variant='filled' label='Username'></TextField><br />
-        <TextField sx={{marginTop:'18px'}} variant='filled' label='Password' type='password'></TextField><br /><br />
-        <Button variant='contained' style={{backgroundColor:'#ef7b53' , color:'black'}}>Sign In</Button>
+          <TextField onChange={(e) => setEmail(e.target.value)} sx={{}} variant='filled' label='Email'></TextField><br />
+        <TextField onChange={(e) => setPassword(e.target.value)}   sx={{marginTop:'30px'}} variant='filled' label='Password' type='password'></TextField><br /><br />
+        <Button onClick={signIn} variant='contained' style={{backgroundColor:'#ef7b53' , color:'white'}}>Sign In</Button>
         <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
         <h4>New User?</h4>
         <div style={{width: '5px'}}></div>

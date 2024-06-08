@@ -1,13 +1,27 @@
-import { Button, IconButton, Toolbar, Typography ,AppBar} from '@mui/material'
-import React from 'react'
+import { Button, IconButton, Toolbar, Typography ,AppBar, Avatar} from '@mui/material'
+import React, { useEffect, useState } from 'react'
 import ApiIcon from '@mui/icons-material/Api';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Search } from '@mui/icons-material';
 import styled from 'styled-components';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { Link } from 'react-router-dom';
 
 
 const Navbar = ({text, buttonText, path, path_second }) => {
-  return (
+  const [user, setUser] = useState(false);
+  const auth = getAuth();
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(true);
+      } else {
+        setUser(false);
+      }
+    })
+  }, [])
+  // const user = firebase.auth().currentUser;
+  return !user ? (
     <div>
       
       <AppBar position="static" style={{backgroundColor:'#ef7b53'}}>
@@ -50,6 +64,50 @@ const Navbar = ({text, buttonText, path, path_second }) => {
               >{buttonText}
             </Button>
 
+          </div>
+        </Toolbar>
+      </AppBar>
+   
+    </div>
+  ) : (
+    <div>
+      
+      <AppBar position="static" style={{backgroundColor:'#ef7b53'}}>
+        <Toolbar>
+        <IconButton
+            size="large"
+            edge="start"
+            color='default'
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+            <ApiIcon/>
+          </IconButton>
+
+
+          <Typography variant="h5" component="div" >
+            E-Shopping
+          </Typography><br />  &nbsp;&nbsp;&nbsp;&nbsp;
+          <SearchContainer>
+          <Search style={{ color: 'black' }} />
+
+          <CustomInput variant='outlined' placeholder='Search for products brands and more..' style={{display:'flex',background:'#fff',marginLeft: '10px',width: '35%', borderRadius:'2px',}}>
+          </CustomInput>
+          </SearchContainer>
+          <div style={{ display: 'flex', marginLeft: 'auto' }}>
+            <Button style={{color:'white'}}>
+              <ShoppingCartIcon/>
+            </Button>     &nbsp;
+
+            <Button
+              variant='contained'
+              style={{marginLeft:'10px',backgroundColor:"black", marginRight: "14px"}}
+              href={path}
+              >{buttonText}
+            </Button>
+            <Link to="/userDetails">
+              <Avatar />
+            </Link>
           </div>
         </Toolbar>
       </AppBar>
