@@ -4,9 +4,10 @@ import "./App.css";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
-import ProductList from "./components/Productlist";
+import ProductList from "./components/ProductList";
 import ProductDetails from "./components/ProductDetails";
 import ShoppingCart from "./components/ShoppingCart";
+import UserDetails from "./components/UserDetails";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/cart" element={<ShoppingCart />} />
         <Route path="/products" element={<ProductList />} />
+        <Route path="/userDetails" element={<UserDetails />} />
         <Route path="/products/:id" element={<ProductDetails />} />
       </Routes>
     </div>

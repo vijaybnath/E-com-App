@@ -1,22 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import axios from "axios";
 
 function ProductCard({ productImage, productTitle, productPrice, productDescription }) {
     const navigate = useNavigate();
     const data = { productTitle: productTitle, productPrice: productPrice, productDescription: productDescription, productImage: productImage }
+    const cartProduct = useState({productTitle: productTitle, productImageURL: productImage, productPrice: productPrice.toString()})
 
     const navigatePage = () => {
         navigate(`/products/${productPrice}`, {state: data})
     }   
 
+    const addProduct = async () => {
+        console.log(productImage)
+        await axios.post("http://localhost:9000/api/addCart", {productTitle: productTitle, productImageURL: productImage, productPrice: productPrice.toString()});
+    }
+
     return (
-        <ProductContainer onClick={navigatePage}>
+        <ProductContainer>
             <ProductImage src={productImage} alt="picture" />
             <h4>{productTitle}</h4>
             <h3>${productPrice}</h3>
             {/* <h3>{productDescription}</h3> */}
-            <CartButton>Add To Cart</CartButton>
+            <CartButton onClick={addProduct}>Add To Cart</CartButton>
             <BuyButton>Buy Now</BuyButton>
         </ProductContainer>
     )

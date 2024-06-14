@@ -5,12 +5,13 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Search } from '@mui/icons-material';
 import styled from 'styled-components';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const Navbar = ({text, buttonText, path, path_second }) => {
   const [user, setUser] = useState(false);
   const auth = getAuth();
+  const navigate = useNavigate();
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -47,7 +48,7 @@ const Navbar = ({text, buttonText, path, path_second }) => {
           </CustomInput>
           </SearchContainer>
           <div style={{ display: 'flex', marginLeft: 'auto' }}>
-            <Button style={{color:'white'}}>
+            <Button style={{color:'white'}} onClick={() => navigate("/cart")}>
               <ShoppingCartIcon/>
             </Button>     &nbsp;      
             <Button 
@@ -95,7 +96,7 @@ const Navbar = ({text, buttonText, path, path_second }) => {
           </CustomInput>
           </SearchContainer>
           <div style={{ display: 'flex', marginLeft: 'auto' }}>
-            <Button style={{color:'white'}}>
+            <Button style={{color:'white'}}  onClick={() => navigate("/cart")}>
               <ShoppingCartIcon/>
             </Button>     &nbsp;
 
