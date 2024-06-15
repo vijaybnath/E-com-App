@@ -1,37 +1,34 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from "axios";
 
 function ProductCard({ productImage, productTitle, productPrice, productDescription }) {
     const navigate = useNavigate();
-    const data = { productTitle: productTitle, productPrice: productPrice, productDescription: productDescription, productImage: productImage }
-    const cartProduct = useState({productTitle: productTitle, productImageURL: productImage, productPrice: productPrice.toString()})
+    const data = {productTitle: productTitle, productPrice: productPrice, productDescription: productDescription, productImage: productImage }
 
     const navigatePage = () => {
         navigate(`/products/${productPrice}`, {state: data})
     }   
 
     const addProduct = async () => {
-        console.log(productImage)
         await axios.post("http://localhost:9000/api/addCart", {productTitle: productTitle, productImageURL: productImage, productPrice: productPrice.toString()});
+        
     }
-
+    
     return (
         <ProductContainer>
-            <ProductImage src={productImage} alt="picture" />
-            <h4>{productTitle}</h4>
+            <ProductImage src={productImage} alt="picture"  onClick={navigatePage} />
+            <h4  onClick={navigatePage}>{productTitle}</h4>
             <h3>${productPrice}</h3>
-            {/* <h3>{productDescription}</h3> */}
             <CartButton onClick={addProduct}>Add To Cart</CartButton>
-            <BuyButton>Buy Now</BuyButton>
+            <BuyButton onClick={navigatePage}>Buy Now</BuyButton>
         </ProductContainer>
     )
 }
 
 const ProductContainer = styled.div `
     display: flex;
-    cursor: pointer;
     flex-direction: column;
     max-height: min-content;
     min-height: min-content;
@@ -42,15 +39,18 @@ const ProductContainer = styled.div `
 
     h4 {
         font-weight: 500;
+        cursor: pointer;
     }
 
     h3 {
+        cursor: pointer;
         font-weight: 500;
     }
 `;
 
 const ProductImage = styled.img `
     border-radius: 20px ;
+    cursor: pointer;
 `;
 
 const CartButton = styled.button `
