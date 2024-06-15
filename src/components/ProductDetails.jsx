@@ -2,6 +2,7 @@ import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Navbar from './Navbar';
 import styled from 'styled-components';
+import axios from 'axios';
 
 function ProductDetails (props) {
     const location = useLocation();
@@ -10,6 +11,11 @@ function ProductDetails (props) {
 
     const navigatePage = () => {
         navigate("/cart")
+    }
+
+    const addProduct = async () => {
+        navigate("/cart")
+        await axios.post("http://localhost:9000/api/addCart", {productTitle: data.productTitle, productImageURL: data.productImage, productPrice: data.productPrice.toString()});
     }
 
   return (
@@ -24,8 +30,8 @@ function ProductDetails (props) {
                     <h3>{data.productDescription}</h3>
                     <h1>${data.productPrice}</h1>
                     <ProductButtons>
-                        <CartButton onClick={navigatePage}>Add To Cart</CartButton>
-                        <BuyButton>Buy Now</BuyButton>
+                        <CartButton onClick={addProduct}>Add To Cart</CartButton>
+                        <BuyButton onClick={navigatePage}>Buy Now</BuyButton>
                     </ProductButtons>
                 </ProductTextContainer>
             </ProductDetailsContainer>
