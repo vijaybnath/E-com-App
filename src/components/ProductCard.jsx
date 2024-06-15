@@ -18,7 +18,7 @@ function ProductCard({ productImage, productTitle, productPrice, productDescript
     }
 
     return (
-        <ProductContainer>
+        <ProductContainer onClick={navigatePage}>
             <ProductImage src={productImage} alt="picture" />
             <h4>{productTitle}</h4>
             <h3>${productPrice}</h3>
