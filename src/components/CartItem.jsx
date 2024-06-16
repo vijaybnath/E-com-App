@@ -6,8 +6,8 @@ const CartItem = ({ productID, imageUrl, title, productPrice }) => {
   const deleteItem = async () => {
     await axios
       .delete(`http://localhost:9000/api/delete/${productID}`)
-      .then((response) => console.log("Deleted: ", response.data))
-      .catch((err) => console.log("error: ", err));
+      .then((response) => alert("Item Deleted."))
+      .catch((err) => alert("Failed To Remove."));
   };
 
   return (
@@ -50,7 +50,7 @@ const DeleteButton = styled.button`
   border-radius: 99px;
   color: white;
   background-color: black;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   padding: 12px;
   cursor: pointer;

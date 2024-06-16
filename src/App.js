@@ -10,6 +10,8 @@ import ShoppingCart from "./components/ShoppingCart";
 import UserDetails from "./components/UserDetails";
 import AdminPanel from "./components/AdminPanel";
 import NewProduct from "./components/NewProduct";
+import PaymentForm from "./components/PaymentForm";
+import PaymentSuccess from "./components/PaymentSuccess";
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
           path="/admin/productDetails/:id"
           element={<ProductDetails adminProduct />}
         />
+        <Route path="/checkout" element={<PaymentForm />} />
+        <Route path="/paymentSuccessful" element={<PaymentSuccess />} />
       </Routes>
     </div>
   );

@@ -35,11 +35,14 @@ function ProductCard({
   };
 
   const addCartProduct = async () => {
-    await axios.post("http://localhost:9000/api/addCart", {
-      productTitle: productTitle,
-      productImageURL: productImage,
-      productPrice: productPrice.toString(),
-    });
+    await axios
+      .post("http://localhost:9000/api/addCart", {
+        productTitle: productTitle,
+        productImageURL: productImage,
+        productPrice: productPrice.toString(),
+      })
+      .then(alert("Product Added To Cart!"))
+      .catch((err) => alert("Failed To Add Product."));
   };
 
   return !adminProduct ? (

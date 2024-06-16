@@ -3,9 +3,11 @@ import Navbar from "./Navbar";
 import styled from "styled-components";
 import CartItem from "./CartItem";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const ShoppingCart = () => {
   const [cartProducts, setCartProducts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get("http://localhost:9000/api/view").then((res) => {
@@ -22,7 +24,9 @@ const ShoppingCart = () => {
       />
       <CartContainer>
         <h2>Cart Total: $10</h2>
-        <CheckButton>Checkout Cart</CheckButton>
+        <CheckButton onClick={() => navigate("/checkout")}>
+          Checkout Cart
+        </CheckButton>
         {cartProducts.map((product) => {
           return (
             <CartItem
