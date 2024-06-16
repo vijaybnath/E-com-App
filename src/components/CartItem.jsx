@@ -1,12 +1,14 @@
-import axios from 'axios';
-import React from 'react';
-import styled from 'styled-components';
+import axios from "axios";
+import React from "react";
+import styled from "styled-components";
 
-const CartItem = ({productID, imageUrl, title, productPrice}) => {
+const CartItem = ({ productID, imageUrl, title, productPrice }) => {
   const deleteItem = async () => {
-    await axios.delete(`http://localhost:9000/api/delete/${productID}`)
-    .then(response => console.log("deleted: ", response.data)).catch(err => console.log("error: ", err))
-  }
+    await axios
+      .delete(`http://localhost:9000/api/delete/${productID}`)
+      .then((response) => console.log("Deleted: ", response.data))
+      .catch((err) => console.log("error: ", err));
+  };
 
   return (
     <CartDiv>
@@ -17,10 +19,10 @@ const CartItem = ({productID, imageUrl, title, productPrice}) => {
         <DeleteButton onClick={deleteItem}>Delete From Cart</DeleteButton>
       </ProductDetails>
     </CartDiv>
-  )
-}
+  );
+};
 
-const CartDiv = styled.div `
+const CartDiv = styled.div`
   display: flex;
   align-items: center;
   border-radius: 20px;
@@ -32,17 +34,17 @@ const CartDiv = styled.div `
   margin-bottom: 10px;
 `;
 
-const ProductImage = styled.img `
+const ProductImage = styled.img`
   height: 160px;
   border-radius: 20px;
 `;
 
-const ProductDetails = styled.div `
+const ProductDetails = styled.div`
   font-size: 18px;
   font-weight: 500;
 `;
 
-const DeleteButton = styled.button `
+const DeleteButton = styled.button`
   outline: none;
   border: none;
   border-radius: 99px;
@@ -54,4 +56,4 @@ const DeleteButton = styled.button `
   cursor: pointer;
 `;
 
-export default CartItem
+export default CartItem;
