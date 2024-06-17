@@ -8,6 +8,8 @@ import ProductList from "./components/ProductList";
 import ProductDetails from "./components/ProductDetails";
 import ShoppingCart from "./components/ShoppingCart";
 import UserDetails from "./components/UserDetails";
+import PaymentForm from "./components/PaymentForm";
+import PaymentSuccess from "./components/PaymentSuccess";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
         <Route path="/products" element={<ProductList />} />
         <Route path="/userDetails" element={<UserDetails />} />
         <Route path="/products/:id" element={<ProductDetails />} />
+        <Route path="/checkout" element={<PaymentForm/>} />
+        <Route path="/payment" element={<PaymentSuccess/>} />    
       </Routes>
     </div>
   );

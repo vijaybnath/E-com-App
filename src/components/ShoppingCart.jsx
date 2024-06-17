@@ -10,18 +10,17 @@ const ShoppingCart = () => {
   useEffect(() => {
     axios.get("http://localhost:9000/api/view").then((res) => {
       setCartProducts(res.data)
-      console.log(res.data)
     })
   }, [])
   return (
     <div>
-        <Navbar path="/" buttonText="Home" />
+        <Navbar path="/" buttonText="Home" path_second={"/login"} text={"Login"} />
         <CartContainer>
-          {cartProducts.map((product) => (
-            <CartItem imageUrl={product.productImageURL} title={product.productTitle} productPrice={product.productPrice} />
-          ))}
-          <h2>Cart Total: $100</h2>
-
+          <h2>Cart Total: $10</h2>
+          <CheckButton>Checkout Cart</CheckButton>
+          {cartProducts.map((product) => {
+            return <CartItem productID={product._id}imageUrl={product.productImageURL} title={product.productTitle} productPrice={product.productPrice} />
+          })}
         </CartContainer>
     </div>
   )
@@ -29,10 +28,29 @@ const ShoppingCart = () => {
 
 const CartContainer = styled.div `
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   h2 {
     font-size: 25px;
     font-weight: 500;
   }
-`
+`;
+
+const CheckButton = styled.button `
+  min-height: 40px;
+  max-width: 160px;
+  padding: 12px;
+  outline: none;
+  border: none;
+  font-size: 18px;
+  font-weight: 500;
+  background-color: black;
+  color: white;
+  border-radius: 99px;
+  margin: auto; 
+  margin-bottom: 10px;
+  cursor: pointer;
+`;
 
 export default ShoppingCart
