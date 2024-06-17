@@ -1,32 +1,48 @@
-import React, { useEffect, useState } from 'react'
-import Navbar from './Navbar'
-import styled from 'styled-components'
-import CartItem from './CartItem'
-import axios from 'axios'
+import React, { useEffect, useState } from "react";
+import Navbar from "./Navbar";
+import styled from "styled-components";
+import CartItem from "./CartItem";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const ShoppingCart = () => {
   const [cartProducts, setCartProducts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get("http://localhost:9000/api/view").then((res) => {
-      setCartProducts(res.data)
-    })
-  }, [])
+      setCartProducts(res.data);
+    });
+  }, []);
   return (
     <div>
-        <Navbar path="/" buttonText="Home" path_second={"/login"} text={"Login"} />
-        <CartContainer>
-          <h2>Cart Total: $10</h2>
-          <CheckButton>Checkout Cart</CheckButton>
-          {cartProducts.map((product) => {
-            return <CartItem productID={product._id}imageUrl={product.productImageURL} title={product.productTitle} productPrice={product.productPrice} />
-          })}
-        </CartContainer>
+      <Navbar
+        path="/"
+        buttonText="Home"
+        path_second={"/login"}
+        text={"Login"}
+      />
+      <CartContainer>
+        <h2>Cart Total: $10</h2>
+        <CheckButton onClick={() => navigate("/checkout")}>
+          Checkout Cart
+        </CheckButton>
+        {cartProducts.map((product) => {
+          return (
+            <CartItem
+              productID={product._id}
+              imageUrl={product.productImageURL}
+              title={product.productTitle}
+              productPrice={product.productPrice}
+            />
+          );
+        })}
+      </CartContainer>
     </div>
-  )
-}
+  );
+};
 
-const CartContainer = styled.div `
+const CartContainer = styled.div`
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -37,7 +53,7 @@ const CartContainer = styled.div `
   }
 `;
 
-const CheckButton = styled.button `
+const CheckButton = styled.button`
   min-height: 40px;
   max-width: 160px;
   padding: 12px;
@@ -48,9 +64,9 @@ const CheckButton = styled.button `
   background-color: black;
   color: white;
   border-radius: 99px;
-  margin: auto; 
+  margin: auto;
   margin-bottom: 10px;
   cursor: pointer;
 `;
 
-export default ShoppingCart
+export default ShoppingCart;
