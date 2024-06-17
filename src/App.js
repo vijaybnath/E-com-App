@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-
+import React from "react";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
@@ -8,6 +8,10 @@ import ProductList from "./components/Productlist";
 import ProductDetails from "./components/ProductDetails";
 import ShoppingCart from "./components/ShoppingCart";
 import UserDetails from "./components/UserDetails";
+import AdminPanel from "./components/AdminPanel";
+import NewProduct from "./components/NewProduct";
+import PaymentForm from "./components/PaymentForm";
+import PaymentSuccess from "./components/PaymentSuccess";
 
 function App() {
   return (
@@ -21,6 +25,17 @@ function App() {
         <Route path="/products" element={<ProductList />} />
         <Route path="/userDetails" element={<UserDetails />} />
         <Route path="/products/:id" element={<ProductDetails />} />
+        <Route path="/admin/newProduct" element={<NewProduct />} />
+        <Route
+          path="/admin/products/update"
+          element={<NewProduct updateProduct />}
+        />
+        <Route
+          path="/admin/productDetails/:id"
+          element={<ProductDetails adminProduct />}
+        />
+        <Route path="/checkout" element={<PaymentForm />} />
+        <Route path="/paymentSuccessful" element={<PaymentSuccess />} />
       </Routes>
     </div>
   );

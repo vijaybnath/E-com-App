@@ -6,6 +6,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Search } from "@mui/icons-material";
 
+
 const AdminPanel = () => {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
