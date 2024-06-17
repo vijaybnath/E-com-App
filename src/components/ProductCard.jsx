@@ -24,12 +24,6 @@ function ProductCard({
     navigate(`/products/${productPrice}`, { state: data });
   };
 
-  const deleteProduct = async () => {
-    await axios.delete(
-      `http://localhost:9000/adminPanel/delete/product/${productId}`
-    );
-  };
-
   const navigateAdminPage = () => {
     navigate(`/admin/productDetails/${productPrice}`, { state: data });
   };
@@ -43,6 +37,13 @@ function ProductCard({
       })
       .then(alert("Product Added To Cart!"))
       .catch((err) => alert("Failed To Add Product."));
+  };
+
+  const deleteProduct = async () => {
+    await axios.delete(
+      `http://localhost:9000/adminPanel/delete/product/${productId}`
+    );
+    window.location.reload();
   };
 
   return !adminProduct ? (

@@ -86,7 +86,6 @@ const SearchContainer = styled.div`
 
 const CustomInput = styled.input`
   display: flex;
-  /* height: 40px; */
   min-width: 240px;
   outline: none;
   border: none;

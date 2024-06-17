@@ -4,16 +4,22 @@ import styled from "styled-components";
 import ProductCard from "./ProductCard";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Search } from "@mui/icons-material";
 
 const AdminPanel = () => {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     axios.get("http://localhost:9000/adminPanel/view/products").then((res) => {
       setProducts(res.data);
     });
   }, []);
+
+  const searchProduct = products.filter((product) => {
+    return product.productTitle.toLowerCase().includes(search.toLowerCase());
+  });
 
   return (
     <div>
@@ -30,8 +36,25 @@ const AdminPanel = () => {
             Add New Product
           </AddProduct>
         </ProductDetails>
+        <SearchContainer>
+          <Search style={{ color: "black" }} />
+
+          <CustomInput
+            variant="outlined"
+            placeholder="Search for products brands and more.."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            style={{
+              display: "flex",
+              background: "#fff",
+              marginLeft: "10px",
+              width: "35%",
+              borderRadius: "2px",
+            }}
+          ></CustomInput>
+        </SearchContainer>
         <ProductsContainer>
-          {products.map((product) => {
+          {searchProduct.map((product) => {
             return (
               <ProductCard
                 productId={product._id}
@@ -85,6 +108,28 @@ const AddProduct = styled.button`
   color: white;
   margin-left: 20px;
   cursor: pointer;
+`;
+
+const SearchContainer = styled.div`
+  display: flex;
+  width: 350px;
+  padding: 10px;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid lightgrey;
+`;
+
+const CustomInput = styled.input`
+  display: flex;
+  min-width: 240px;
+  outline: none;
+  border: none;
+  background-color: white;
 `;
 
 export default AdminPanel;

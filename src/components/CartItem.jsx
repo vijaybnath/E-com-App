@@ -8,6 +8,7 @@ const CartItem = ({ productID, imageUrl, title, productPrice }) => {
       .delete(`http://localhost:9000/api/delete/${productID}`)
       .then((response) => alert("Item Deleted."))
       .catch((err) => alert("Failed To Remove."));
+    window.location.reload();
   };
 
   return (
