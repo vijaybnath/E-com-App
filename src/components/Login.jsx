@@ -18,9 +18,9 @@ const Login = () => {
       navigate("/adminPanel");
     } else {
       try {
-        signInWithEmailAndPassword(auth, email, password);
-      } catch (error) {
-        alert(error.message);
+        await signInWithEmailAndPassword(auth, email, password);
+      } catch (e) {
+        alert(e.message);
       }
       navigate("/");
     }
