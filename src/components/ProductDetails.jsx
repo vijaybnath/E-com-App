@@ -10,7 +10,7 @@ function ProductDetails({ adminProduct }) {
   const navigate = useNavigate();
 
   const navigatePage = () => {
-    navigate("/cart");
+    navigate("/checkout");
   };
 
   const deleteProduct = async () => {

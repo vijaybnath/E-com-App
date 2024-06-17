@@ -3,9 +3,10 @@ import Navbar from "./Navbar";
 import ProductCard from "./ProductCard";
 import styled from "styled-components";
 import axios from "axios";
+import { Search } from "@mui/icons-material";
 
 const ProductList = () => {
-  // const [search, setSearch] = useState("");
+  const [search, setSearch] = useState("");
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -13,6 +14,10 @@ const ProductList = () => {
       setProducts(res.data);
     });
   }, []);
+
+  const searchProduct = products.filter((product) => {
+    return product.productTitle.toLowerCase().includes(search.toLowerCase());
+  });
 
   return (
     <div>
@@ -22,8 +27,27 @@ const ProductList = () => {
         path={"/"}
         path_second={"/login"}
       />
+
+      <SearchContainer>
+        <Search style={{ color: "black" }} />
+
+        <CustomInput
+          variant="outlined"
+          placeholder="Search for products brands and more.."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          style={{
+            display: "flex",
+            background: "#fff",
+            marginLeft: "10px",
+            width: "35%",
+            borderRadius: "2px",
+          }}
+        ></CustomInput>
+      </SearchContainer>
+
       <ProductRowContainer>
-        {products.map((product) => {
+        {searchProduct.map((product) => {
           return (
             <ProductCard
               productImage={product.productImageURL}
@@ -44,6 +68,29 @@ const ProductRowContainer = styled.div`
   height: fit-content;
   padding: 20px;
   gap: 10px;
+`;
+
+const SearchContainer = styled.div`
+  display: flex;
+  width: 350px;
+  padding: 10px;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid lightgrey;
+`;
+
+const CustomInput = styled.input`
+  display: flex;
+  /* height: 40px; */
+  min-width: 240px;
+  outline: none;
+  border: none;
+  background-color: white;
 `;
 
 export default ProductList;

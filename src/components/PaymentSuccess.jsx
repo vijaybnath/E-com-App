@@ -10,7 +10,7 @@ const PaymentSuccess = () => {
         text="Home"
         buttonText={"Products"}
         path="/products"
-        path_second="/login"
+        path_second="/"
       />
       <MainContainer>
         <TitleContainer>
