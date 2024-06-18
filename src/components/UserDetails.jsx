@@ -44,6 +44,7 @@ const UserDetails = () => {
         <h2>Phone Number: {userPhoneNum}</h2>
         <h2>Email: {currentUser.email}</h2>
         <LogOutButton onClick={logOut}>Log Out</LogOutButton>
+        <EditButton onClick={() => navigate("/editUser")}>Edit User Details</EditButton>
       </MainDetails>
     </DetailsContainer>
   );
@@ -76,6 +77,21 @@ const LogOutButton = styled.button`
   font-weight: 500;
   width: 120px;
   cursor: pointer;
+  margin-left: 10px;
+`;
+
+const EditButton = styled.button`
+  outline: none;
+  border: none;
+  padding: 10px;
+  background-color: black;
+  color: white;
+  font-size: 18px;
+  border-radius: 20px;
+  font-weight: 500;
+  width: 180px;
+  cursor: pointer;
+  margin-left: 10px;
 `;
 
 export default UserDetails;

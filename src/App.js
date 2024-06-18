@@ -12,6 +12,7 @@ import AdminPanel from "./components/AdminPanel";
 import NewProduct from "./components/NewProduct";
 import PaymentForm from "./components/PaymentForm";
 import PaymentSuccess from "./components/PaymentSuccess";
+import EditUserDetails from "./components/EditUserDetails";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/userDetails" element={<UserDetails />} />
         <Route path="/products/:id" element={<ProductDetails />} />
         <Route path="/admin/newProduct" element={<NewProduct />} />
+        <Route path="/editUser" element={<EditUserDetails />} />
         <Route
           path="/admin/products/update"
           element={<NewProduct updateProduct />}
