@@ -17,12 +17,12 @@ const SignUp = () => {
 
   const signUp = async () => {
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
       axios.post("http://localhost:9000/accounts/newUser", {
         username: username,
         userPhoneNumber: phoneNum,
         userEmail: email,
-      }).then((res) => navigate("/", {replace: true}));
+      });
+      await createUserWithEmailAndPassword(auth, email, password).then((res) => navigate("/", { replace: true }));
     } catch (err) {
       alert(err.message);
     }
